@@ -60,7 +60,7 @@ btnAdd.addEventListener("click", function () {
         Y.textContent = Y.textContent;
         Y.textContent++;
         contadorY++;
-
+        console.log(`Contador de actividades por hacer incrementado en ${contadorY}`);
     }
 })
 
@@ -83,6 +83,8 @@ btnClear.addEventListener("click", function () {
             item.remove();
             X.textContent = X.textContent;
             X.textContent++;
+            console.log("Elemento eliminado de lista de tareas");
+            console.log(`Contador de actividades hechas incrementado en ${contadorX}`);
         }
     })
 });
