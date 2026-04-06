@@ -75,9 +75,10 @@ selectorCategory.addEventListener("change", function () {
 
 btnClear.addEventListener("click", function () {
     const checks = document.querySelectorAll(".checkHecho");
+    let confirmacion = confirm("¿Desea eliminar las tareas seleccionadas?");
 
     checks.forEach(check => {
-        if (check.checked) {
+        if (check.checked && confirmacion) {
             const item = check.closest("li");
             item.remove();
             X.textContent = X.textContent;
