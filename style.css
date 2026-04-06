@@ -77,6 +77,15 @@ input[type="checkbox"] {
     letter-spacing: 1px;
 }
 
+
+select option {
+    appearance: none;
+    background: #1a1a2e;
+    width: 80%;
+    color: #eee;
+    padding: 10px;
+}
+
 #resultado {
     margin-top: 30px;
     text-align: center;
