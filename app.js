@@ -1,11 +1,14 @@
 
 const btnAdd = document.getElementById("btnAddTask")
+const btnClear = document.getElementById("btnClear")
+
+const selectorCategory = document.getElementById("category")
+const inputTwo = document.getElementById("inputTwo")
 
 const textOne = document.getElementById("inputOne")
 
 const tskList = document.getElementById("taskList")
 
-const btnClear = document.getElementById("btnClear")
 
 let Y = document.getElementById("Y")
 let X = document.getElementById("x")
@@ -24,33 +27,61 @@ btnAdd.addEventListener("click", function () {
     taskImportant.type = "checkbox";
 
     //! Asignar el texto de la nueva tarea al contenido del nuevo elemento de lista
-    newTask.textContent = textOne.value;
+    if (selectorCategory.value === "Trabajo") {
+        newTask.textContent = `💼 Trabajo: ${textOne.value}`;
+    }
+    else if (selectorCategory.value === "Estudio") {
+        newTask.textContent = `📚 Estudio: ${textOne.value}`;
+    }
+    else if (selectorCategory.value === "Personal") {
+        newTask.textContent = `🏠 Personal:  ${textOne.value}`;
+    }
+    else if (selectorCategory.value === "Urgente") {
+        newTask.textContent = `🔴 Urgente: ${textOne.value}`;
+    }
+    else {
+        newTask.textContent = `📝 ${inputTwo.value}: ${textOne.value}`;
+    }
     newTask.id = `task${contadorY}`;
 
-    // if (textOne.value === "") {
-    //     alert("Por favor, ingrese una tarea válida.");
-    //     return;
-    // }
-    // else {
-    tskList.appendChild(newTask);
-    taskCheck.id = "checkHecho";
-    taskImportant.id = "checkImportant";
+    if (textOne.value === "" || selectorCategory.value === "") {
+        alert("Por favor, ingrese una TAREA o CATEGORÍA válida.");
+        return;
+    }
+    else {
+        //! Agregar los checkboxes al nuevo elemento de lista, y creamos nombre de clase.
+        taskCheck.classList.add("checkHecho");
+        taskImportant.classList.add("checkImportant");
+        newTask.appendChild(taskCheck);
+        newTask.appendChild(taskImportant);
 
-    tskList.appendChild(taskCheck);
-    tskList.appendChild(taskImportant);
-    contadorY++;
+        tskList.appendChild(newTask);
 
-    Y.textContent = parseInt(contadorY.textContent) + 1;
-    // }
+        Y.textContent = Y.textContent;
+        Y.textContent++;
+        contadorY++;
+
+    }
 })
 
+selectorCategory.addEventListener("change", function () {
+    if (selectorCategory.value == "Otra") {
+        inputTwo.style.opacity = "1";
+    }
+    else {
+        inputTwo.style.opacity = "0";
+    }
+});
 
-// btnClear.addEventListener("click", function () {
-//     const checkTaskHecho = document.getElementById("checkHecho");
-//     if (checkTaskHecho.checked) {
-//         tskList.removeChild(checkTaskHecho);
-//         contadorY.textContent = parseInt(contadorY.textContent) + 1;
-//         console.log("SSSSSSS");
+btnClear.addEventListener("click", function () {
+    const checks = document.querySelectorAll(".checkHecho");
 
-//     }
-// })
+    checks.forEach(check => {
+        if (check.checked) {
+            const item = check.closest("li");
+            item.remove();
+            X.textContent = X.textContent;
+            X.textContent++;
+        }
+    })
+});
